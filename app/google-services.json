@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "427907129899",
+    "project_id": "tugaspam-f35f4",
+    "storage_bucket": "tugaspam-f35f4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:427907129899:android:a89fa80d0af62ef1b2806e",
+        "android_client_info": {
+          "package_name": "com.example.pokedex"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAkidTzUbRNwnAloVxK-sdSfjlociE-lQ8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:427907129899:android:4e8f832b5ddb0024b2806e",
+        "android_client_info": {
+          "package_name": "com.example.tubes_pam"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAkidTzUbRNwnAloVxK-sdSfjlociE-lQ8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

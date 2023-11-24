@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_1"
+        android:icon="@drawable/nav1"
+        android:title="Pokemon"/>
+
+    <item
+        android:id="@+id/nav_2"
+        android:icon="@drawable/nav2"
+        android:title="Favorite"/>
+    <item
+        android:id="@+id/nav_3"
+        android:icon="@drawable/nav3"
+        android:title="My Pokemon"/>
+
+    <item
+        android:id="@+id/nav_4"
+        android:icon="@drawable/nav4"
+        android:title="Profile"/>
+</menu>

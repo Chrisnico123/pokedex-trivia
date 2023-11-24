@@ -1,4 +1,4 @@
-package com.example.pokedex
+package com.example.pokedex.config
 
 import com.example.pokedex.model.Pokemon
 import com.example.pokedex.model.ResponseData
@@ -11,7 +11,6 @@ interface ApiService {
     @GET("pokemon")
     fun getListPokemon(@Query("page") page: String): Call<ResponseData>
 
-    //get list user by id using path
     @GET("pokemon/{id}")
     fun getPokemon(@Path("id") id: String): Call<Pokemon>
 }

@@ -1,4 +1,4 @@
-package com.example.pokedex
+package com.example.pokedex.ui.Pokemon
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,10 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.pokedex.R
 import com.example.pokedex.model.ResponseData
-import com.dicoding.parsingjson.network.ApiConfig
 import com.example.pokedex.model.HomeSprites
 import com.example.pokedex.model.OtherSprites
 import com.example.pokedex.model.Pokemon
@@ -98,10 +97,6 @@ class PokemonFragment : Fragment() {
             }
         })
     }
-
-
-
-
 
     private fun extractPokemonIdFromUrl(url: String?): Int {
         val segments = url?.split("/") ?: emptyList()

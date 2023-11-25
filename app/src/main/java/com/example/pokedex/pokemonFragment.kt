@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pokedex.model.ResponseData
 import com.dicoding.parsingjson.network.ApiConfig
@@ -46,7 +45,7 @@ class PokemonFragment : Fragment() {
     }
 
     private fun fetchPokemonData() {
-        val page = "1"
+        val page = 1
         apiService.getListPokemon(page).enqueue(object : Callback<ResponseData> {
             override fun onResponse(call: Call<ResponseData>, response: Response<ResponseData>) {
                 if (response.isSuccessful) {

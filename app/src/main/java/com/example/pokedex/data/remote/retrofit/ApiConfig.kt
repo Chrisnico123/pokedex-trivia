@@ -1,4 +1,4 @@
-import com.example.pokedex.config.ApiService
+import com.example.pokedex.data.remote.retrofit.ApiService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

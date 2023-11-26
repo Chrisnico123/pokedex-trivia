@@ -18,6 +18,5 @@ public class MyPokemon {
     @ColumnInfo(name = "userId")
     public String userId;
 
-    // Getter dan Setter
 }
 

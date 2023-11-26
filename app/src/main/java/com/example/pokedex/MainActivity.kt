@@ -8,9 +8,10 @@ import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.example.pokedex.databinding.ActivityMainBinding
-import com.example.pokedex.ui.MyPokemon.MyPokemonFragment
+import com.example.pokedex.ui.home.HomeFragment
+import com.example.pokedex.ui.pokemon.MyPokemonFragment
 import com.example.pokedex.ui.favorite.FavoriteFragment
-import com.example.pokedex.ui.Pokemon.PokemonFragment
+import com.example.pokedex.ui.profile.ProfileFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 
@@ -20,8 +21,8 @@ class MainActivity : AppCompatActivity() {
 
     val favFragment : Fragment = FavoriteFragment()
     val myPokemonFragment : Fragment = MyPokemonFragment()
-    val pokemonFragment : Fragment = PokemonFragment()
-    val profileFragment : Fragment = FavoriteFragment()
+    val pokemonFragment : Fragment = HomeFragment()
+    val profileFragment : Fragment = ProfileFragment()
 
     val fm : FragmentManager = supportFragmentManager
     var active : Fragment = pokemonFragment
@@ -60,16 +61,16 @@ class MainActivity : AppCompatActivity() {
 
         bottomNavigationMenu.setOnItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.nav_1 -> {
+                R.id.nav_home -> {
                     callFragment(0 , pokemonFragment)
                 }
-                R.id.nav_2 -> {
+                R.id.nav_favorite -> {
                     callFragment(1 , favFragment)
                 }
-                R.id.nav_3 -> {
+                R.id.nav_my_pokemon -> {
                     callFragment(3 , myPokemonFragment)
                 }
-                R.id.nav_4 -> {
+                R.id.nav_profile -> {
                     callFragment(4 , profileFragment)
                 }
             }

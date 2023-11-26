@@ -19,5 +19,5 @@ public interface FavoriteDao {
 
     @Delete
     void deleteFavorite(Favorite favorite);
-    // Metode lain sesuai kebutuhan
+
 }

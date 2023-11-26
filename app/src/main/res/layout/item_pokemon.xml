@@ -14,7 +14,7 @@
         android:padding="8dp">
 
         <ImageView
-            android:id="@+id/iv_pokemon"
+            android:id="@+id/iv_sprite_pokemon"
             android:layout_width="140dp"
             android:layout_height="140dp"
             android:scaleType="centerInside"

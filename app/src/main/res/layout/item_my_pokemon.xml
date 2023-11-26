@@ -13,7 +13,7 @@
         android:padding="8dp">
 
         <ImageView
-            android:id="@+id/iv_pokemon"
+            android:id="@+id/iv_sprite_pokemon"
             android:layout_width="140dp"
             android:layout_height="140dp"
             android:scaleType="centerInside"
@@ -45,7 +45,7 @@
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/iv_pokemon" />
+            app:layout_constraintTop_toTopOf="@id/iv_sprite_pokemon" />
 
         <TextView
             android:id="@+id/tv_code_pokemon"

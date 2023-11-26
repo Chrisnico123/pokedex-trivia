@@ -13,5 +13,5 @@ public interface UserDao {
 
     @Insert
     void register(User user);
-    // Metode lain sesuai kebutuhan
+
 }

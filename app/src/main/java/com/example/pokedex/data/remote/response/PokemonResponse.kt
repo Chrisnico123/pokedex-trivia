@@ -1,8 +1,9 @@
-package com.example.pokedex.model
+package com.example.pokedex.data.remote.response
 
+import com.example.pokedex.model.DataItemPokemon
 import com.google.gson.annotations.SerializedName
 
-data class ResponseData(
+data class PokemonResponse(
     @field:SerializedName("count")
     val count: Int? = null,
 
@@ -13,5 +14,5 @@ data class ResponseData(
     val previous: String? = null,
 
     @field:SerializedName("results")
-    val results: List<DataItem>? = null
+    val results: List<DataItemPokemon>? = null
 )

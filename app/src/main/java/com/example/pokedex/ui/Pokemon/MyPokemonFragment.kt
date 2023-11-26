@@ -1,4 +1,4 @@
-package com.example.pokedex.ui.MyPokemon
+package com.example.pokedex.ui.pokemon
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -27,6 +27,6 @@ class MyPokemonFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_favorite, container, false)
+        return inflater.inflate(R.layout.fragment_detail_pokemon, container, false)
     }
 }

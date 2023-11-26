@@ -26,7 +26,7 @@ class LoginActivity : AppCompatActivity() {
         firebaseAuth = FirebaseAuth.getInstance()
         db = AppDatabase.getInstance(this)
 
-        val register = findViewById<TextView>(R.id.new_register)
+        val register = findViewById<TextView>(R.id.tv_route_register)
 
         register.setOnClickListener {
             val changePage = Intent(this, RegisterActivity::class.java)

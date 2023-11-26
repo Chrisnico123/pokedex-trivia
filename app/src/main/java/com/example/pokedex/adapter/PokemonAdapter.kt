@@ -1,4 +1,4 @@
-package com.example.pokedex.ui.Pokemon
+package com.example.pokedex.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,18 +8,18 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.pokedex.R
-import com.example.pokedex.model.Pokemon
+import com.example.pokedex.data.remote.response.PokemonDetailResponse
 
-class PokemonAdapter(private val pokemonList: MutableList<Pokemon>) :
+class PokemonAdapter(private val pokemonList: MutableList<PokemonDetailResponse>, private val itemClickListener: (PokemonDetailResponse) -> Unit) :
     RecyclerView.Adapter<PokemonAdapter.PokemonViewHolder>() {
 
     inner class PokemonViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val imageViewPokemon: ImageView = itemView.findViewById(R.id.iv_pokemon)
+        val imageViewPokemon: ImageView = itemView.findViewById(R.id.iv_sprite_pokemon)
         val textViewName: TextView = itemView.findViewById(R.id.tv_name_pokemon)
         val textViewIndex: TextView = itemView.findViewById(R.id.tv_code_pokemon)
     }
 
-    fun updateData(newPokemonList: List<Pokemon>) {
+    fun updateData(newPokemonList: List<PokemonDetailResponse>) {
         pokemonList.clear()
         pokemonList.addAll(newPokemonList)
         notifyDataSetChanged()
@@ -42,6 +42,8 @@ class PokemonAdapter(private val pokemonList: MutableList<Pokemon>) :
 
         holder.textViewName.text = currentItem.name ?: "Pokemon Name"
         holder.textViewIndex.text = "#${currentItem.order ?: "001"}"
+
+        holder.itemView.setOnClickListener { itemClickListener(currentItem) }
     }
 
     override fun getItemCount() = pokemonList.size

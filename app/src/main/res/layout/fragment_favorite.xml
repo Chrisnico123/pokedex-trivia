@@ -2,8 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.Pokemon.PokemonFragment">
+    android:layout_height="match_parent">
 
     <ImageView
         android:id="@+id/iv_logo_pokemon"
@@ -18,7 +17,7 @@
         android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view"
+            android:id="@+id/rv_list_fav_pokemon"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:listitem="@layout/item_fav_pokemon"

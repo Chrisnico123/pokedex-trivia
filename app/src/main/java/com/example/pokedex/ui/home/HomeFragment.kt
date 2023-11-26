@@ -1,4 +1,4 @@
-package com.example.pokedex.ui.Pokemon
+package com.example.pokedex.ui.home
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,17 +7,20 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.pokedex.adapter.PokemonAdapter
 import com.example.pokedex.R
-import com.example.pokedex.model.ResponseData
-import com.example.pokedex.model.HomeSprites
-import com.example.pokedex.model.OtherSprites
-import com.example.pokedex.model.Pokemon
-import com.example.pokedex.model.SpriteDetails
+import com.example.pokedex.data.remote.response.PokemonResponse
+import com.example.pokedex.data.remote.response.PokemonDetailResponse
+import com.example.pokedex.data.remote.response.Sprites
+import com.example.pokedex.data.remote.response.Other
+import com.example.pokedex.data.remote.response.Home
+import com.example.pokedex.data.remote.response.Stats
+import com.example.pokedex.data.remote.response.Types
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class PokemonFragment : Fragment() {
+class HomeFragment : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: PokemonAdapter
@@ -28,7 +31,7 @@ class PokemonFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_pokemon, container, false)
-        recyclerView = view.findViewById(R.id.recycler_view)
+        recyclerView = view.findViewById(R.id.rv_list_pokemon)
 
         setupRecyclerView()
 
@@ -40,67 +43,74 @@ class PokemonFragment : Fragment() {
     private fun setupRecyclerView() {
         val layoutManager = GridLayoutManager(requireContext(), 2)
         recyclerView.layoutManager = layoutManager
-        adapter = PokemonAdapter(ArrayList())
+        adapter = PokemonAdapter(ArrayList()) { selectedItem ->
+            navigateToDetailFragment(selectedItem)
+        }
         recyclerView.adapter = adapter
     }
 
     private fun fetchPokemonData() {
         val page = 1
-        apiService.getListPokemon(page).enqueue(object : Callback<ResponseData> {
-            override fun onResponse(call: Call<ResponseData>, response: Response<ResponseData>) {
+        apiService.getListPokemon(page).enqueue(object : Callback<PokemonResponse> {
+            override fun onResponse(call: Call<PokemonResponse>, response: Response<PokemonResponse>) {
                 if (response.isSuccessful) {
                     val responseData = response.body()
                     responseData?.results?.let { dataItemList ->
-                        val pokemonDataList = mutableListOf<Pokemon>()
-                        var fetchedPokemonCount = 0 // Untuk melacak jumlah Pokemon yang sudah diambil
+                        val pokemonDataList = mutableListOf<PokemonDetailResponse>()
+                        var fetchedPokemonCount = 0
                         for (dataItem in dataItemList) {
-                            apiService.getPokemon(dataItem.name ?: "").enqueue(object : Callback<Pokemon> {
-                                override fun onResponse(call: Call<Pokemon>, response: Response<Pokemon>) {
+                            apiService.getPokemon(dataItem.name ?: "").enqueue(object : Callback<PokemonDetailResponse> {
+                                override fun onResponse(call: Call<PokemonDetailResponse>, response: Response<PokemonDetailResponse>) {
                                     if (response.isSuccessful) {
                                         val pokemon = response.body()
                                         pokemon?.let {
                                             val frontDefaultUrl = it.sprites?.other?.home?.frontDefault
-                                            val updatedPokemon = Pokemon(
+                                            val updatedPokemon = PokemonDetailResponse(
                                                 name = it.name,
                                                 order = it.order,
-                                                sprites = SpriteDetails(other = OtherSprites(
-                                                    home = HomeSprites(
+                                                sprites = Sprites(other = Other(
+                                                    home = Home(
                                                         frontDefault = frontDefaultUrl
                                                     )
                                                 ))
                                             )
                                             pokemonDataList.add(updatedPokemon)
                                             fetchedPokemonCount++
-                                            // Jika semua Pokemon sudah diambil, update adapter dengan data yang sudah dikumpulkan
                                             if (fetchedPokemonCount == dataItemList.size) {
                                                 adapter.updateData(pokemonDataList)
                                             }
                                         }
-                                    } else {
-                                        // Handle response error
-                                    }
+                                    } else {}
                                 }
-
-                                override fun onFailure(call: Call<Pokemon>, t: Throwable) {
-                                    // Handle network failure
-                                }
+                                override fun onFailure(call: Call<PokemonDetailResponse>, t: Throwable) {}
                             })
                         }
                     }
-                } else {
-                    // Handle response error
-                }
+                } else {}
             }
-
-            override fun onFailure(call: Call<ResponseData>, t: Throwable) {
-                // Handle network failure
-            }
+            override fun onFailure(call: Call<PokemonResponse>, t: Throwable) {}
         })
     }
 
     private fun extractPokemonIdFromUrl(url: String?): Int {
         val segments = url?.split("/") ?: emptyList()
         return segments[segments.size - 2].toInt()
+    }
+
+    private fun navigateToDetailFragment(itemData: PokemonDetailResponse) {
+        val bundle = Bundle().apply {
+            putString("name", itemData.name)
+            itemData.order?.let { putInt("order", it) }
+            putString("sprite", itemData.sprites?.other?.home?.frontDefault)
+        }
+
+        val detailFragment = PokemonDetailFragment()
+        detailFragment.arguments = bundle
+
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.container, detailFragment)
+            .addToBackStack(null)
+            .commit()
     }
 
 }

@@ -2,7 +2,7 @@ package com.example.pokedex.model
 
 import com.google.gson.annotations.SerializedName
 
-data class DataItem(
+data class DataItemPokemon(
     @field:SerializedName("name")
     val name: String? = null,
 

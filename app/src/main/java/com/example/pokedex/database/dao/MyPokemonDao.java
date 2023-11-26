@@ -19,5 +19,5 @@ public interface MyPokemonDao {
 
     @Delete
     void deleteMyPokemon(MyPokemon myPokemon);
-    // Metode lain sesuai kebutuhan
+
 }

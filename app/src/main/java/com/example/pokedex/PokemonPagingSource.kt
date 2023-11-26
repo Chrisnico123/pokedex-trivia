@@ -2,24 +2,23 @@ package com.example.pokedex
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.example.pokedex.model.DataItem
-import com.example.pokedex.model.Pokemon
-import com.example.pokedex.config.ApiService
+import com.example.pokedex.data.remote.response.PokemonDetailResponse
+import com.example.pokedex.data.remote.retrofit.ApiService
 import retrofit2.HttpException
 import java.io.IOException
 
 class PokemonPagingSource(
     private val apiService: ApiService
-) : PagingSource<Int, Pokemon>() {
+) : PagingSource<Int, PokemonDetailResponse>() {
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Pokemon> {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, PokemonDetailResponse> {
         return try {
             val nextPageNumber = params.key ?: 1
             val response = apiService.getListPokemon(nextPageNumber).execute()
 
             if (response.isSuccessful) {
                 val responseData = response.body()
-                val pokemonList = mutableListOf<Pokemon>()
+                val pokemonList = mutableListOf<PokemonDetailResponse>()
 
                 responseData?.results?.forEach { dataItem ->
                     val pokemonResponse = apiService.getPokemon(getIdFromUrl(dataItem.url ?: ""))
@@ -45,7 +44,7 @@ class PokemonPagingSource(
         }
     }
 
-    override fun getRefreshKey(state: PagingState<Int, Pokemon>): Int? {
+    override fun getRefreshKey(state: PagingState<Int, PokemonDetailResponse>): Int? {
         return state.anchorPosition?.let { anchorPosition ->
             state.closestPageToPosition(anchorPosition)?.prevKey?.plus(1)
                 ?: state.closestPageToPosition(anchorPosition)?.nextKey?.minus(1)

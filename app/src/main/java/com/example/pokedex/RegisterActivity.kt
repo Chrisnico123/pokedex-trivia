@@ -21,7 +21,7 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
-        var loginAcc = findViewById<TextView>(R.id.login)
+        var loginAcc = findViewById<TextView>(R.id.tv_route_login)
 
         loginAcc.setOnClickListener {
             val changePage = Intent(this, LoginActivity::class.java)
@@ -56,8 +56,6 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun processRegister(username: String, email: String, password: String, repassword: String) {
         progressDialog.show()
-        println(password)
-        println(repassword)
         if (password == repassword) {
             firebaseAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->

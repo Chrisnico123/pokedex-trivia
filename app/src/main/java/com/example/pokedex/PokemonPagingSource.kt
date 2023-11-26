@@ -4,7 +4,7 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.pokedex.model.DataItem
 import com.example.pokedex.model.Pokemon
-import com.example.pokedex.ApiService
+import com.example.pokedex.config.ApiService
 import retrofit2.HttpException
 import java.io.IOException
 

@@ -1,6 +1,4 @@
-package com.dicoding.parsingjson.network
-
-import com.example.pokedex.ApiService
+import com.example.pokedex.config.ApiService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

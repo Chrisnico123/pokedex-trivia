@@ -3,10 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PokemonFragment">
+    tools:context=".ui.Pokemon.PokemonFragment">
 
     <ImageView
-        android:id="@+id/pokemon"
+        android:id="@+id/iv_logo_pokemon"
         android:layout_width="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_height="60dp"
@@ -21,7 +21,7 @@
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:listitem="@layout/item_detail_fav"
+            tools:listitem="@layout/item_fav_pokemon"
             />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

@@ -5,10 +5,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.FrameLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.example.pokedex.databinding.ActivityMainBinding
+import com.example.pokedex.ui.MyPokemon.MyPokemonFragment
+import com.example.pokedex.ui.favorite.FavoriteFragment
+import com.example.pokedex.ui.Pokemon.PokemonFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 

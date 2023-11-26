@@ -68,10 +68,10 @@ class MainActivity : AppCompatActivity() {
                     callFragment(1 , favFragment)
                 }
                 R.id.nav_my_pokemon -> {
-                    callFragment(3 , myPokemonFragment)
+                    callFragment(2 , myPokemonFragment)
                 }
                 R.id.nav_profile -> {
-                    callFragment(4 , profileFragment)
+                    callFragment(3 , profileFragment)
                 }
             }
             true

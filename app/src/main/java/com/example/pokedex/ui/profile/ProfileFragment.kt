@@ -1,4 +1,4 @@
-package com.example.pokedex.ui.favorite
+package com.example.pokedex.ui.profile
 
 import android.os.Bundle
 import android.view.LayoutInflater

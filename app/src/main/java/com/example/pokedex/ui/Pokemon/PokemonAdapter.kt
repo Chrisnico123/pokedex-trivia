@@ -33,7 +33,6 @@ class PokemonAdapter(private val pokemonList: MutableList<Pokemon>) :
 
     override fun onBindViewHolder(holder: PokemonViewHolder, position: Int) {
         val currentItem = pokemonList[position]
-        println(currentItem)
 
         Glide.with(holder.itemView.context)
             .load(currentItem.sprites?.other?.home?.frontDefault)

@@ -45,7 +45,7 @@ class PokemonFragment : Fragment() {
     }
 
     private fun fetchPokemonData() {
-        val page = "1"
+        val page = 1
         apiService.getListPokemon(page).enqueue(object : Callback<ResponseData> {
             override fun onResponse(call: Call<ResponseData>, response: Response<ResponseData>) {
                 if (response.isSuccessful) {

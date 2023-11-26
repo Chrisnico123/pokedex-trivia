@@ -9,7 +9,7 @@ import retrofit2.http.Query
 
 interface ApiService {
     @GET("pokemon")
-    fun getListPokemon(@Query("page") page: String): Call<ResponseData>
+    fun getListPokemon(@Query("page") page: Int): Call<ResponseData>
 
     @GET("pokemon/{id}")
     fun getPokemon(@Path("id") id: String): Call<Pokemon>

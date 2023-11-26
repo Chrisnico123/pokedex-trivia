@@ -11,6 +11,7 @@ import com.example.pokedex.databinding.ActivityMainBinding
 import com.example.pokedex.ui.MyPokemon.MyPokemonFragment
 import com.example.pokedex.ui.favorite.FavoriteFragment
 import com.example.pokedex.ui.Pokemon.PokemonFragment
+import com.example.pokedex.ui.profile.ProfileFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 
@@ -21,7 +22,7 @@ class MainActivity : AppCompatActivity() {
     val favFragment : Fragment = FavoriteFragment()
     val myPokemonFragment : Fragment = MyPokemonFragment()
     val pokemonFragment : Fragment = PokemonFragment()
-    val profileFragment : Fragment = FavoriteFragment()
+    val profileFragment : Fragment = ProfileFragment()
 
     val fm : FragmentManager = supportFragmentManager
     var active : Fragment = pokemonFragment
@@ -67,10 +68,10 @@ class MainActivity : AppCompatActivity() {
                     callFragment(1 , favFragment)
                 }
                 R.id.nav_3 -> {
-                    callFragment(3 , myPokemonFragment)
+                    callFragment(2 , myPokemonFragment)
                 }
                 R.id.nav_4 -> {
-                    callFragment(4 , profileFragment)
+                    callFragment(3 , profileFragment)
                 }
             }
             true

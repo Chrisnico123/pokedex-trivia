@@ -7,24 +7,24 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.pokedex.database.AppDatabase
+//import com.example.pokedex.database.AppDatabase
 import com.example.pokedex.database.entitas.User
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+//import kotlinx.coroutines.CoroutineScope
+//import kotlinx.coroutines.Dispatchers
+//import kotlinx.coroutines.launch
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var firebaseAuth: FirebaseAuth
-    private lateinit var db: AppDatabase
+//    private lateinit var db: AppDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
         firebaseAuth = FirebaseAuth.getInstance()
-        db = AppDatabase.getInstance(this)
+//        db = AppDatabase.getInstance(this)
 
         val register = findViewById<TextView>(R.id.new_register)
 
@@ -65,8 +65,8 @@ class LoginActivity : AppCompatActivity() {
                             this.id = userId
                         }
 
-                        // Masukkan data user ke dalam Room Database
-                        saveUserToDatabase(newUser)
+//                        saveUserToDatabase(newUser)
+                        navigateToMainActivity()
                     } else {
                         // Data user tidak lengkap, berikan pesan kesalahan
                         Toast.makeText(this, "Data pengguna tidak lengkap", Toast.LENGTH_SHORT).show()
@@ -79,13 +79,13 @@ class LoginActivity : AppCompatActivity() {
             }
     }
 
-    private fun saveUserToDatabase(user: User) {
-        // Gunakan coroutine untuk menjalankan operasi database di luar thread utama
-        CoroutineScope(Dispatchers.IO).launch {
-            db.userDao().register(user)
-            navigateToMainActivity()
-        }
-    }
+//    private fun saveUserToDatabase(user: User) {
+//        // Gunakan coroutine untuk menjalankan operasi database di luar thread utama
+//        CoroutineScope(Dispatchers.IO).launch {
+//            db.userDao().register(user)
+//            navigateToMainActivity()
+//        }
+//    }
 
     private fun navigateToMainActivity() {
         // Pastikan navigasi dilakukan di thread UI

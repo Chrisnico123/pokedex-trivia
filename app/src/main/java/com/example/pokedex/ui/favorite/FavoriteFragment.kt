@@ -4,29 +4,57 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.example.pokedex.R
-
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.pokedex.databinding.FragmentFavoriteBinding
+import com.example.pokedex.utils.ViewModelFactory
+import com.example.pokedex.adapter.FavoriteAdapter
+import com.google.firebase.auth.FirebaseAuth
 
 class FavoriteFragment : Fragment() {
-    private var param1: String? = null
-    private var param2: String? = null
+    private val firebaseAuth = FirebaseAuth.getInstance()
+    private var _binding: FragmentFavoriteBinding? = null
+    private val binding get() = _binding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        _binding = FragmentFavoriteBinding.inflate(layoutInflater, container, false)
+        return binding?.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val factory: ViewModelFactory = ViewModelFactory.getInstance(requireActivity())
+        val viewModel: FavoriteViewModel by viewModels {
+            factory
+        }
+
+        val pokemonAdapter = FavoriteAdapter { pokemon ->
+            if (pokemon.isFavorite){
+                viewModel.deleteFromFavorite(pokemon)
+            } else {
+                viewModel.saveToFavoritePokemon(pokemon)
+            }
+        }
+
+        val currentUser = firebaseAuth.currentUser
+
+        currentUser?.uid?.let {
+            viewModel.getFavoritePokemon(it).observe(viewLifecycleOwner, { favoritePokemon ->
+                pokemonAdapter.submitList(favoritePokemon)
+            })
+        }
+
+        binding?.rvListFavPokemon?.apply {
+            layoutManager = LinearLayoutManager(context)
+            setHasFixedSize(true)
+            adapter = pokemonAdapter
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_detail_pokemon, container, false)
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }

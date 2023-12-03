@@ -1,11 +1,13 @@
 package com.example.pokedex.ui.profile
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.pokedex.LoginActivity
 import com.example.pokedex.databinding.FragmentProfileBinding
 
 class ProfileFragment : Fragment() {
@@ -36,6 +38,8 @@ class ProfileFragment : Fragment() {
         binding.btnLogout.setOnClickListener {
             profileViewModel.logout()
             // Tambahkan kode untuk navigasi atau aksi setelah logout
+            val changePage = Intent(activity, LoginActivity::class.java)
+            startActivity(changePage)
         }
         return view
     }

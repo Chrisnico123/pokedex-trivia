@@ -16,6 +16,7 @@ import com.example.pokedex.data.remote.response.Other
 import com.example.pokedex.data.remote.response.Home
 import com.example.pokedex.data.remote.response.Stats
 import com.example.pokedex.data.remote.response.Types
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -32,6 +33,8 @@ class HomeFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_pokemon, container, false)
         recyclerView = view.findViewById(R.id.rv_list_pokemon)
+
+        hideBottomNav(false)
 
         setupRecyclerView()
 
@@ -111,6 +114,17 @@ class HomeFragment : Fragment() {
             .replace(R.id.container, detailFragment)
             .addToBackStack(null)
             .commit()
+
+        hideBottomNav(true)
+    }
+
+    private fun hideBottomNav(isShow: Boolean) {
+        val bottomAppBar = activity?.findViewById<BottomNavigationView>(R.id.nav_bottom)
+        if (isShow) {
+            bottomAppBar?.visibility = View.GONE
+        } else {
+            bottomAppBar?.visibility = View.VISIBLE
+        }
     }
 
 }

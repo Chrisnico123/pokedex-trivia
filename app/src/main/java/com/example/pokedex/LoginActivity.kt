@@ -8,7 +8,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 //import com.example.pokedex.database.AppDatabase
-import com.example.pokedex.database.entitas.User
 import com.google.firebase.auth.FirebaseAuth
 //import kotlinx.coroutines.CoroutineScope
 //import kotlinx.coroutines.Dispatchers
@@ -57,30 +56,26 @@ class LoginActivity : AppCompatActivity() {
                     val userEmail = user.email ?: ""
                     val userId = user.uid ?: ""
 
-                    // Pastikan data user tidak null sebelum disimpan ke dalam Room Database
                     if (username.isNotEmpty() && userEmail.isNotEmpty() && userId.isNotEmpty()) {
-                        val newUser = User().apply {
-                            this.username = username
-                            this.email = userEmail
-                            this.id = userId
-                        }
+//                        val newUser = User().apply {
+//                            this.username = username
+//                            this.email = userEmail
+//                            this.id = userId
+//                        }
 
 //                        saveUserToDatabase(newUser)
                         navigateToMainActivity()
                     } else {
-                        // Data user tidak lengkap, berikan pesan kesalahan
                         Toast.makeText(this, "Data pengguna tidak lengkap", Toast.LENGTH_SHORT).show()
                     }
                 }
             }
             .addOnFailureListener { error ->
-                // Tangani kegagalan proses login
                 Toast.makeText(this, error.localizedMessage, Toast.LENGTH_SHORT).show()
             }
     }
 
 //    private fun saveUserToDatabase(user: User) {
-//        // Gunakan coroutine untuk menjalankan operasi database di luar thread utama
 //        CoroutineScope(Dispatchers.IO).launch {
 //            db.userDao().register(user)
 //            navigateToMainActivity()
@@ -88,11 +83,9 @@ class LoginActivity : AppCompatActivity() {
 //    }
 
     private fun navigateToMainActivity() {
-        // Pastikan navigasi dilakukan di thread UI
         runOnUiThread {
             startActivity(Intent(this, MainActivity::class.java))
-            finish() // Selesai activity setelah berhasil login
+            finish()
         }
     }
-
 }

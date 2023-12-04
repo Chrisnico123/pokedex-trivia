@@ -18,6 +18,7 @@ class ProfileViewModel : ViewModel() {
         return currentUser?.email ?: "Email not found"
     }
 
+
     // Function untuk logout user dari Firebase
     fun logout() {
         firebaseAuth.signOut()

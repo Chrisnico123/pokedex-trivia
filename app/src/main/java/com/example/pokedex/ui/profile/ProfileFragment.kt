@@ -37,12 +37,16 @@ class ProfileFragment : Fragment() {
         // Setup listener untuk tombol logout
         binding.btnLogout.setOnClickListener {
             profileViewModel.logout()
+            val intent = Intent(requireContext(), LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
             // Tambahkan kode untuk navigasi atau aksi setelah logout
             val changePage = Intent(activity, LoginActivity::class.java)
             startActivity(changePage)
         }
         return view
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
